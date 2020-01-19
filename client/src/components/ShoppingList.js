@@ -1,42 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import uuid from 'uuid'
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-const ShoppingList = () => {
-let initialItems = [
-    {id: uuid(), name: 'Milk'},
-    {id: uuid(), name: 'Cheese'},
-    {id: uuid(), name: 'Eggs'},
-    {id: uuid(), name: 'Bread'}
-]
+import {connect} from 'react-redux'
+import {fetchItems} from '../actions/itemActions'
+import PropTypes from 'prop-types'
 
-const [items, setItems] = useState(initialItems)
+const ShoppingList = (props) => {
+
+useEffect(() => {
+    props.fetchItems()
+}, [])
 
 return (
     <Container>
         <Button 
             color="dark"
             style={{marginBottom: '2rem'}}
-            onClick={() => {
+            /* onClick={() => {
                 const name = prompt('Enter item')
                 if (name) {
                     setItems([...items, {id: uuid(), name: name}])
                 }
-            }}>
+            }} */>
             Add Item
         </Button>
 
         <ListGroup>
             <TransitionGroup className="shopping-list">
-                {items.map(item => (
+                {props.items.items.map(item => (
                     <CSSTransition key={item.id} timeout={500} classNames="fade">
                         <ListGroupItem>
                             <Button 
                                 className="remove-btn"
                                 color="danger"
                                 size="sm "
-                                onClick={() => {setItems(items.filter(i => i.id !== item.id))}}> 
+                                /* onClick={() => {setItems(items.filter(i => i.id !== item.id))}} */> 
                                 Delete
                             </Button>
                             {item.name}
@@ -50,4 +50,13 @@ return (
 )
 }
 
-export default ShoppingList
+ShoppingList.propTypes = {
+    fetchItems: PropTypes.func.isRequired,
+    items: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    items: state.items
+})
+
+export default connect(mapStateToProps, {fetchItems})(ShoppingList)
