@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import uuid from 'uuid'
+
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import {connect} from 'react-redux'
-import {fetchItems} from '../actions/itemActions'
+import {fetchItems, newItem, deleteItem} from '../actions/itemActions'
 import PropTypes from 'prop-types'
 
 const ShoppingList = (props) => {
@@ -15,18 +15,6 @@ useEffect(() => {
 
 return (
     <Container>
-        <Button 
-            color="dark"
-            style={{marginBottom: '2rem'}}
-            /* onClick={() => {
-                const name = prompt('Enter item')
-                if (name) {
-                    setItems([...items, {id: uuid(), name: name}])
-                }
-            }} */>
-            Add Item
-        </Button>
-
         <ListGroup>
             <TransitionGroup className="shopping-list">
                 {props.items.items.map(item => (
@@ -36,7 +24,8 @@ return (
                                 className="remove-btn"
                                 color="danger"
                                 size="sm "
-                                /* onClick={() => {setItems(items.filter(i => i.id !== item.id))}} */> 
+                                onClick={() => props.deleteItem(item.id)}
+                            > 
                                 Delete
                             </Button>
                             {item.name}
@@ -52,6 +41,8 @@ return (
 
 ShoppingList.propTypes = {
     fetchItems: PropTypes.func.isRequired,
+    newItem: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired,
     items: PropTypes.object.isRequired
 }
 
@@ -59,4 +50,4 @@ const mapStateToProps = state => ({
     items: state.items
 })
 
-export default connect(mapStateToProps, {fetchItems})(ShoppingList)
+export default connect(mapStateToProps, {fetchItems, newItem, deleteItem})(ShoppingList)

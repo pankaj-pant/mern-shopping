@@ -1,4 +1,4 @@
-import {FETCH_ITEMS, NEW_ITEM} from '../actions/types'
+import {FETCH_ITEMS, NEW_ITEM, DELETE_ITEM} from '../actions/types'
 import uuid from 'uuid'
 
 const initialState = {
@@ -15,6 +15,18 @@ export default function (state = initialState, action) {
         case FETCH_ITEMS:
             console.log('inside fetch items reducer')
             return {...state}
+        case NEW_ITEM:
+            console.log('inside create new item reducer')
+            return {
+                ...state,
+                items: [action.payload, ...state.items]
+            }
+        case DELETE_ITEM:
+            console.log('inside delete item reducer')
+            return {
+                ...state,
+                items: state.items.filter(i => i.id !== action.payload)
+            }
         default:
             return state
     }
