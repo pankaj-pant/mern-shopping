@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap'
 import {connect} from 'react-redux'
 import {newItem} from '../actions/itemActions'
-import uuid from 'uuid'
 
 const ItemModal = (props) => {
     const [modal, setModal] = useState(false)
@@ -19,7 +18,7 @@ const ItemModal = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
          
-        const itemToAdd = {id: uuid(), name: item}
+        const itemToAdd = {name: item}
 
         props.newItem(itemToAdd)
         toggle()

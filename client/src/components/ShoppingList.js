@@ -18,13 +18,13 @@ return (
         <ListGroup>
             <TransitionGroup className="shopping-list">
                 {props.items.items.map(item => (
-                    <CSSTransition key={item.id} timeout={500} classNames="fade">
+                    <CSSTransition key={item._id} timeout={500} classNames="fade">
                         <ListGroupItem>
                             <Button 
                                 className="remove-btn"
                                 color="danger"
                                 size="sm "
-                                onClick={() => props.deleteItem(item.id)}
+                                onClick={() => props.deleteItem(item._id)}
                             > 
                                 Delete
                             </Button>
