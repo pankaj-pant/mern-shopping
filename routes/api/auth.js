@@ -24,7 +24,6 @@ router.post('/', (req, res) => {
                 return res.status(400).json({message: "User does not exist"})
             }
 
-
             //Validate password
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
@@ -46,7 +45,6 @@ router.post('/', (req, res) => {
                         } 
                     )    
                 })
-           
         })
 })
 

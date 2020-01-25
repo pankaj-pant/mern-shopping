@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const config = require('config')
 const jwt = require('jsonwebtoken')
 
-//Item model
+//User model
 const User = require('../../models/User')
 
 //POST api/users
