@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, NavLink } from 'reactstrap'
+import React, { useState, useEffect } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, NavLink, Alert } from 'reactstrap'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {register} from '../../actions/authActions'
+import {clearErrors} from '../../actions/errorActions'
 
 const RegisterModal = (props) => {
     const [state, setState] = useState({
@@ -12,19 +14,38 @@ const RegisterModal = (props) => {
         msg: null
     })
 
+    useEffect(() => {
+        //Check for register error
+        if(props.error.id === 'REGISTER_FAIL') {
+            setState({...state, msg: props.error.msg.message})
+        } else {
+            setState({...state, msg: null})
+        }
+
+        //Close modal if authenticated
+          if(state.modal && props.isAuthenticated) {
+            toggle()
+        }
+
+    }, [props.error, props.isAuthenticated])
+
     const toggle = () => {
-        setState({modal: !state.modal})
+        props.clearErrors()
+        setState({...state, modal: !state.modal})
     }
 
     const handleChange = (event) => {
-        setState({[event.target.name]: event.target.value})
+        setState({...state, [event.target.name]: event.target.value})
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event) => {   
         event.preventDefault()
-         
-
-        toggle()
+        const newUser = {
+            name: state.name,
+            email: state.email,
+            password: state.password
+        }
+        props.register(newUser) 
     }
 
     return (
@@ -38,6 +59,7 @@ const RegisterModal = (props) => {
             >
                 <ModalHeader toggle={toggle}>Register</ModalHeader>
                 <ModalBody>
+                    {state.msg ? (<Alert color='danger'>{state.msg}</Alert>) : null}
                     <Form onSubmit={handleSubmit}>
                         <FormGroup>
                             <Label for="name">Name</Label>
@@ -60,7 +82,9 @@ const RegisterModal = (props) => {
 
 RegisterModal.propTypes = {
     isAuthenticated: PropTypes.bool,
-    error: PropTypes.object.isRequired
+    error: PropTypes.object.isRequired,
+    register: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -68,4 +92,4 @@ const mapStateToProps = state => ({
     error: state.error
 })
 
-export default connect(mapStateToProps, {})(RegisterModal)
+export default connect(mapStateToProps, {register, clearErrors})(RegisterModal)
