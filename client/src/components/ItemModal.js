@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap'
 import {connect} from 'react-redux'
 import {newItem} from '../actions/itemActions'
+import PropTypes from 'prop-types'
 
 const ItemModal = (props) => {
     const [modal, setModal] = useState(false)
@@ -26,13 +27,14 @@ const ItemModal = (props) => {
 
     return (
         <div>
-            <Button 
+            {props.isAuthenticated ? <Button 
                 color="dark"
                 style={{marginBottom: '2rem'}}
                 onClick={toggle}
             >
                 Add Item
-            </Button>
+            </Button> : <h4 className="mb-3 ml-4">Please log in to add new items.</h4>}
+            
             <Modal
                 isOpen={modal}
                 toggle={toggle}
@@ -52,8 +54,13 @@ const ItemModal = (props) => {
     )
 }
 
+ItemModal.propTypes = {
+    isAuthenticated: PropTypes.bool
+}
+
 const mapStateToProps = state => ({
-    items: state.items
+    items: state.items,
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, {newItem})(ItemModal)

@@ -20,14 +20,15 @@ return (
                 {props.items.items.map(item => (
                     <CSSTransition key={item._id} timeout={500} classNames="fade">
                         <ListGroupItem>
-                            <Button 
+                            {props.isAuthenticated ? <Button 
                                 className="remove-btn"
                                 color="danger"
                                 size="sm "
                                 onClick={() => props.deleteItem(item._id)}
                             > 
                                 Delete
-                            </Button>
+                            </Button> : null}
+                            
                             {item.name}
                         </ListGroupItem>
                     </CSSTransition>
@@ -43,11 +44,13 @@ ShoppingList.propTypes = {
     fetchItems: PropTypes.func.isRequired,
     newItem: PropTypes.func.isRequired,
     deleteItem: PropTypes.func.isRequired,
-    items: PropTypes.object.isRequired
+    items: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
-    items: state.items
+    items: state.items,
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, {fetchItems, newItem, deleteItem})(ShoppingList)
