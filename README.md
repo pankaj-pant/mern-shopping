@@ -1,43 +1,56 @@
-# mern-shopping
-> shopping list built with the MERN stack. Includes Redux for state management.
+# Shopping List Application
 
-## Quick Start
+A simple shopping list application built using the MERN stack. Frontend built using React, and backend built using Node and Express. Data is stored in MongoDB.
 
-Add your own MONGO_URI to the default.json file. Make sure you set an env var for that and the jwtSecret on deployment
+## Using the app
 
-```bash
-# Install dependencies for server
-npm install
+The shopping list app shows items that have been added to the list. To add or delete items from the list, the user needs to be logged in. For testing purposes the following login credentials may be used:
 
-# Install dependencies for client
-npm run client-install
+email - testuser@testuser.com
 
-# Run the client & server with concurrently
-npm run dev
+password - testuser 
 
-# Run the Express server only
-npm run server
+New users can also register by providing a name, email and password.
 
-# Run the React client only
-npm run client
+## Quick start
 
-# Server runs on http://localhost:5000 and client on http://localhost:3000
+1. [Clone the repo](#1-clone-the-repo).
+1. [Install the dependencies](#2-install-the-dependencies).
+1. [Run the backend](#3-run-the-backend).
+1. [Run the frontend](#4-run-the-frontend).
+
+
+### 1. Clone the repo
+
+Clone the `mern-shopping` repository locally. In a terminal, run:
+
+```
+$ git clone https://github.com/pankaj-pant/mern-shopping.git
+$ cd mern-shopping
 ```
 
-## Deployment
+### 2. Install the dependencies
 
-There is a Heroku post build script so that you do not have to compile your React frontend manually, it is done on the server. Simply push to Heroku and it will build and load the client index.html page
+To install the dependencies, run the command:
 
-## App Info
+    $ npm install
+    $ npm client-install
 
-### Author
+### 3. Run the backend
 
-Pankaj Pant
+This command serves the backend at `http://localhost:5000/`
 
-### Version
+    $ node server.js
 
-1.0.0
+### 4. Run the frontend
 
-### License
+This command serves the app at `http://localhost:3000/`. In a new terminal window, run:
 
-This project is licensed under the MIT License
+    $ cd client
+    $ npm start
+
+# Links
+* [Live Demo](https://mern-shopping-pankaj.herokuapp.com/)
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
