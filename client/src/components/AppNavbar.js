@@ -41,7 +41,7 @@ import {
             <NavItem>
                 <Login />
             </NavItem>
-            <NavLink href="https://github.com/pankaj-pant/mern-shopping#mern-shopping" target="_blank">
+            <NavLink href="https://github.com/pankaj-pant/mern-shopping#shopping-list-application" target="_blank">
                 Help?
             </NavLink>
         </Fragment>
