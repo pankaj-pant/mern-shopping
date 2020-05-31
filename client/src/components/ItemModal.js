@@ -33,7 +33,7 @@ const ItemModal = (props) => {
                 onClick={toggle}
             >
                 Add Item
-            </Button> : <h4 className="mb-3 ml-4">Please log in to add new items.</h4>}
+            </Button> : <h4 className="mb-3 ml-4">Please log in to add new items or delete items from the list.</h4>}
             
             <Modal
                 isOpen={modal}
