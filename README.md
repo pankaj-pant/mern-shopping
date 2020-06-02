@@ -2,6 +2,8 @@
 
 A simple shopping list application built using the MERN stack. Frontend built using React, and backend built using Node and Express. Data is stored in MongoDB.
 
+* [Live Demo](https://mern-shopping-pankaj.herokuapp.com/)
+
 ## Using the app
 
 The shopping list app shows items that have been added to the list. To add or delete items from the list, the user needs to be logged in. For testing purposes the following login credentials may be used:
@@ -34,7 +36,7 @@ $ cd mern-shopping
 To install the dependencies, run the command:
 
     $ npm install
-    $ npm client-install
+    $ npm run client-install
 
 ### 3. Run the backend
 
@@ -48,9 +50,6 @@ This command serves the app at `http://localhost:3000/`. In a new terminal windo
 
     $ cd client
     $ npm start
-
-# Links
-* [Live Demo](https://mern-shopping-pankaj.herokuapp.com/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
